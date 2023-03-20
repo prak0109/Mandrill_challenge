@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Example</title>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Notifications</h1>
+    <ul id="notifications-list"></ul>
+    <script type="text/javascript">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('notification', function(data) {
+            var notificationsList = document.getElementById("notifications-list");
+            var notificationItem = document.createElement("li");
+            notificationItem.innerHTML = "New open email notification (ID: " + data.id + "): " + data.subject;
+
+            notificationsList.prepend(notificationItem);
+        });
+    </script>
+</body>
+</html>
